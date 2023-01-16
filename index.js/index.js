@@ -1,6 +1,13 @@
 const express = require ("express");
 const app = express();
 
+//returns a welcome message
+app.get("/", (req, res) => {
+    res.send("Welcome to MyFlix!");
+});
+
+//List of top 10 movies
+
 let top10Movies = [
     {
         title: 'The Goonies',
