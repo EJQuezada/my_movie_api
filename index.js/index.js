@@ -10,6 +10,11 @@ app.get("/", (req, res) => {
     res.send("Welcome to MyFlix!");
 });
 
+//listen for requests
+app.listen(8080, () = {
+    console.console.log('Your app is listening on port 8080.');
+});
+
 //ERROR Handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
