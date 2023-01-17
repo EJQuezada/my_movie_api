@@ -36,7 +36,8 @@ app.use((err, req, res, next) => {
   });
 
 //returns documentation.html via express.static
-app.use(express.static('public/documentation.html'))
+app.use(express.static('public/documentation.html'));
+app.use(morgan('common'));
 
 //List of top 10 movies
 
