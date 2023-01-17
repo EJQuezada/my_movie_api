@@ -1,7 +1,11 @@
+//importing express package
 const express = require ("express");
+//importing morgan package
+const morgan = require ("morgan");
+//declaring the variable 'app' and attached all functionalities of express to it
 const app = express();
 
-//static
+//static files in response to request
 app.use(express.static("public"));
 app.use(morgan("common"));
 
@@ -11,8 +15,8 @@ app.get("/", (req, res) => {
 });
 
 //listen for requests
-app.listen(8080, () = {
-    console.console.log('Your app is listening on port 8080.');
+app.listen(8080, () => {
+    console.log('Your app is listening on port 8080.');
 });
 
 //ERROR Handling
@@ -26,71 +30,51 @@ app.use((err, req, res, next) => {
 let top10Movies = [
     {
         title: 'The Goonies',
-        director: 'Richard Donner',
-        stars: 'Sean Astin', 'Josh Brolin', 'Jeff Cohen',
-        genres: 'Adventure', 'Comedy', 'Family',
+        release: '1985',
     },
 
     {
         title: 'Como agua para chocolate',
-        director: 'Alfonso Arau',
-        stars: 'Marco Leonardi', 'Lumi Cavazos', 'Regina Torne',
-        genres: 'Drama', 'Romance',
+        release: '1992',
     },
 
     {
         title: 'La vita e bella',
-        director: 'Roberto Benigni',
-        stars: 'Roberto Benigni', 'Nicoletta Braschi', 'Giorgio Cantarini',
-        genres: 'Comedy', 'Drama', 'Romance',
+        release: '1997',
     },
 
     {
         title: 'Citizen Kane',
-        director: 'Orson Welles',
-        stars: 'Orson Welles', 'Joseph Cotten', 'Dorothy Comingore',
-        genres: 'Drama', 'Mystery',
+        release: '1941',
     },
 
     {
         title: 'Big Fish',
-        director: 'Tim Burton',
-        stars: 'Ewan McGregor', 'Billy Crudup', 'Albert Finney'
-        genres: 'Adventure', 'Drama', 'Fantasy',
+        release: '2003',
     },
 
     {
         title: 'Encanto',
-        director: 'Jared Bush', 'Byron Howard', 'Charise Castro Smith',
-        stars: 'Stephanie Beatriz', 'Maria Cecilia Botero', 'John Leguizamo', 'Wilmer Valerrama',
-        genres: 'Animation', 'Comedy', 'Family',
+        release: '2021',
     },
 
     {
         title: 'Mrs. Doubtfire',
-        director: 'Chris Columbus',
-        stars: 'Robin Williams', 'Sally Fields', 'Pierce Brosnan',
-        genres: 'Comedy', 'Drama',
+        release: '1993',
     },
 
     {
         title: 'Coco',
-        director: 'Lee Unkrich', 'Adrian Molina',
-        stars: 'Anthony Gonzalez', 'Gael Garcia Bernal',
-        genres: 'Animation', 'Adventure', 'Comedy',
+        release: '2017',
     },
 
     {
         title: 'Star Wars: Episode IV - A new hope',
-        director: 'George Lucas',
-        stars: 'Mark Hamill', 'Harrison Ford', 'Carrie Fisher',
-        genres: 'Action', 'Adventure', 'Fantasy',
+        release: '1977',
     },
 
     {
         title: 'Ferris Buller\'s Day Off',
-        director: 'John Hughes',
-        stars: 'Matthew Broderick', 'Alan Ruck', 'Mia Sara',
-        genres: 'Comedy',
+        release: '1986',
     },
 ];
