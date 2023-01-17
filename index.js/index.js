@@ -14,6 +14,16 @@ app.get("/", (req, res) => {
     res.send("Welcome to MyFlix!");
 });
 
+//GET documentation.html
+app.get('/documentation', (req, res) => {
+    res.sendFile('public/documentation.html', { root: __dirname });
+});
+
+// GET top movies requests
+app.get('/movies', (req, res) => {
+    res.json(top10Movies);
+});
+
 //listen for requests
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080.');
@@ -24,6 +34,9 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
+
+//returns documentation.html via express.static
+app.use(express.static('public/documentation.html'))
 
 //List of top 10 movies
 
@@ -78,3 +91,8 @@ let top10Movies = [
         release: '1986',
     },
 ];
+
+// GET requests
+app.get('/movies', (req, res) => {
+    res.json(top10Movies)
+})
