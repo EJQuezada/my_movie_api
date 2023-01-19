@@ -93,7 +93,3 @@ let top10Movies = [
     },
 ];
 
-// GET requests
-app.get('/movies', (req, res) => {
-    res.json(top10Movies)
-})
