@@ -87,7 +87,14 @@ app.get('/movies', (req, res) => {
 
 //READ
 app.get('/movies/:title', (req, res) => {
-    res.status(200).json(movies);
+    const { title } = req.params;
+    const movie = movies.find( movie => movie.Title === title );
+
+    if (movie) {
+        res.status(200).json(movie);
+    } else {
+        res.status(400).send('no such movie')
+    }
 })
 
 app.listen(8080, () => console.log("listening on 8080"))
