@@ -14,10 +14,10 @@ let users = [
 ]
 
 let movies = [
-    
+
 ];
 
-app.listen(8080, () ==> console.log("listening on 8080"))
+app.listen(8080, () => console.log("listening on 8080"))
 
 /*
 //importing morgan package
