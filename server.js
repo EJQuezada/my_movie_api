@@ -95,7 +95,7 @@ app.get('/movies/:title', (req, res) => {
     } else {
         res.status(400).send('no such movie')
     }
-    
+      
 })
 
 app.listen(8080, () => console.log("listening on 8080"))
