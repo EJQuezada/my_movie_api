@@ -95,6 +95,19 @@ app.get('/movies/:title', (req, res) => {
     } else {
         res.status(400).send('no such movie')
     }
+
+})
+
+//READ
+app.get('/movies/genre/:genreName', (req, res) => {
+    const { genreName } = req.params;
+    const genre = movies.find( movie => movie.Genre.Name === genreName ).Genre;
+
+    if (genre) {
+        res.status(200).json(genre);
+    } else {
+        res.status(400).send('no such genre')
+    }
       
 })
 
