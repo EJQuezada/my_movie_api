@@ -85,6 +85,11 @@ app.get('/movies', (req, res) => {
     res.status(200).json(movies);
 })
 
+//READ
+app.get('/movies/:title', (req, res) => {
+    res.status(200).json(movies);
+})
+
 app.listen(8080, () => console.log("listening on 8080"))
 
 /*
