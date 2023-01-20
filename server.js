@@ -1,7 +1,7 @@
 //importing express package
-const express = require ('express');
+const express = require ('express'),
 //declaring the variable 'app' and attached all functionalities of express to it
-    const app = express();
+    app = express();
     bodyParser = require ('bodyParser');
     uuid = require ('uuid');
 
