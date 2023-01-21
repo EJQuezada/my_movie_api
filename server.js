@@ -80,6 +80,19 @@ let movies = [
     },
 ];
 
+//CREATE
+app.post('/users', (rew, res) => {
+    const newUser = req.body;
+
+    if (newUser.name) {
+        newUser.id = uuid.v4();
+        users.push(newUser);
+        res.status(201).json(newUser)
+    } else {
+        res.status(400).send('users need names')
+    }
+})
+
 //READ
 app.get('/movies', (req, res) => {
     res.status(200).json(movies);
@@ -107,6 +120,19 @@ app.get('/movies/genre/:genreName', (req, res) => {
         res.status(200).json(genre);
     } else {
         res.status(400).send('no such genre')
+    }
+      
+})
+
+//READ
+app.get('/movies/director/:directorName', (req, res) => {
+    const { directorName } = req.params;
+    const director = movies.find( movie => movie.Director.Name === directorName ).Director;
+
+    if (director) {
+        res.status(200).json(director);
+    } else {
+        res.status(400).send('no such director')
     }
       
 })
