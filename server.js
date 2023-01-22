@@ -81,7 +81,7 @@ let movies = [
 ];
 
 //CREATE
-app.post('/users', (rew, res) => {
+app.post('/users', (req, res) => {
     const newUser = req.body;
 
     if (newUser.name) {
@@ -94,7 +94,7 @@ app.post('/users', (rew, res) => {
 })
 
 //UPDATE
-app.put('/users', (rew, res) => {
+app.put('/users', (req, res) => {
     const newUser = req.body;
 
     if (newUser.name) {
