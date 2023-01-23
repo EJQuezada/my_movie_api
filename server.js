@@ -51,7 +51,7 @@ let movies = [
         "Featured":false
     },
     {
-        "Title":"La Vita e' Bella",
+        "Title":"La Vita e Bella",
         "Description":"When an open-minded Jewish waiter and his son become victims of the Holocaust, he uses a perfect mixture of will, humor, and imagination to protect his son from the dangers around their camp.",
         "Release":"1997",
         "Genre": {
