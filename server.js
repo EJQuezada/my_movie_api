@@ -132,7 +132,7 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 
     if (user) {
         user.favoriteMovies= user.favoriteMovies.filter( title => title !== movieTitle);
-        res.status(200).send(`${movieName} has been added to user ${id}'s array`);
+        res.status(200).send(`${movieName} has been removed from user ${id}'s array`);
     } else {
         res.status(400).send('no such user')
     }
