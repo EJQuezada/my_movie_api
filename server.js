@@ -94,15 +94,17 @@ app.post('/users', (req, res) => {
 })
 
 //UPDATE
-app.put('/users', (req, res) => {
-    const newUser = req.body;
+app.put('/users/:id', (req, res) => {
+    const { id } = req.params;
+    const updatedUser = req.body;
 
-    if (newUser.name) {
-        newUser.id = uuid.v4();
-        users.push(newUser);
-        res.status(201).json(newUser)
+    let user = users.find( user => user.id == id );
+
+    if (user) {
+        user.name = updated.User.name;
+        res.status(200).json(user);
     } else {
-        res.status(400).send('users need names')
+        res.status(400).send('no such user')
     }
 })
 
