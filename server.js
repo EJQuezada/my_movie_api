@@ -210,7 +210,7 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 })
 
 //DELETE
-app.delete('/users/:id', (req, res) => {
+/*app.delete('/users/:Username', (req, res) => {
     const { id } = req.params;
 
     let user = users.find( user => user.id == id );
@@ -222,7 +222,22 @@ app.delete('/users/:id', (req, res) => {
         res.status(400).send('no such user')
     }
 
-})
+})*/
+//Delete a user by username
+app.delete('/users/:Usename', (req, res) => {
+    Users.findOneAndRemove({ Username: req.params.Username})
+        .then((user) => {
+            if (!user) {
+                res.status(400).send(req.params.Username + ' was not found');
+            } else {
+                res.status(200).send(req.params.Username + ' was deleted.');
+            }
+        })
+        .catch ((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
 
 //READ
 app.get('/movies', (req, res) => {
