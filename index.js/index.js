@@ -6,7 +6,7 @@ const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/MyFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-//CREATE
+//CREATE allows new users to register
 app.post('/users', (req, res) => {
     const newUser = req.body;
 
@@ -131,7 +131,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 });
 
 //Delete a user by username
-app.delete('/users/:Usename', (req, res) => {
+app.delete('/users/:Username', (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username})
         .then((user) => {
             if (!user) {
