@@ -1,10 +1,9 @@
 //importing express package
-const express = require ('express'),
+const express = require ('express');
 //declaring the variable 'app' and attached all functionalities of express to it
     app = express();
     bodyParser = require ('body-parser');
-    var uuid = require ('uuid');
-    const uuid = require ('uuid');
+    uuid = require ('uuid');
 
 
 app.use(bodyParser.json());
