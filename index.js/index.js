@@ -69,31 +69,8 @@ app.get('/users/:Username', (req, res) => {
         });
 });
 
-//READ
-//Get all users
-app.get('/users', (req, res) => {
-    Users.find()
-        .then((users) => {
-            res.status(201).json(users);
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        });
-});
+//UPDATE username of a specific user
 
-//UPDATE
-//update username of a specific user
-/*We'll expect JSON in this format
-{
-    Username: String,
-    (required)
-    Password: String,
-    (required)
-    Email: String,
-    (required)
-    Birthday: Date
-}*/
 app.put('/users/:Username', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
         {
