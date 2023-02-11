@@ -6,11 +6,12 @@ const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/MyFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
 
 app.use(bodyParser.json());
+    let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
 
 //return JSON object when at /movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
