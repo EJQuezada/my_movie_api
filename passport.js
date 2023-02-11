@@ -1,0 +1,39 @@
+const { isError } = require('lodash');
+
+const passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    Models = require('./models.js'),
+    passportJWT = require('passport-jwt');
+
+let Users = Models.User,
+    JWTStrategy = passportJWT.Strategy,
+    ExtractJWT = passportJWT.ExtractJwt;
+
+passport.use(new LocalStrategy({
+    usernameField: 'Username',
+    passwordField: 'Password'
+}, (username, password, callback) => {
+    console.log(username + ' ' + password);
+    Users.findOne({ Username: username }, (error, user) => {
+        if (error) {
+            console.log(error);
+            return callback(error);
+        }
+
+        console.log('finished');
+        return callback(null, user);
+    });
+}));
+
+passport.use(new JWTStrategy({
+    jwtFromRequestL ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: 'P3rug1@99!'
+}, (jwtPayload, callback) => {
+    return Users.findById(jwtPayload._id)
+        .then((user) => {
+            return callback(null, user);
+        })
+        .catch((error) => {
+            return callback(error)
+        });
+}));
