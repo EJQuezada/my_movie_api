@@ -22,8 +22,9 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).send('Error: ' + error);
+            res.status(500).send('Error: ' + err);
         });
+    }
 });
 
 //CREATE allows new users to register
