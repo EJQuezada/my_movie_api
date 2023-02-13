@@ -13,8 +13,6 @@ require('./passport');
 app.use(bodyParser.json());
   
 
-
-
 //return JSON object when at /movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
