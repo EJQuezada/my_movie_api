@@ -26,7 +26,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
             res.status(201).json(movies);
         })
         .catch((error) => {
-            console.error(error);
+            console.log(error);
             res.status(500).send('Error: ' + error);
         });
     
