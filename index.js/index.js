@@ -1,10 +1,16 @@
-const mongoose = require('mongoose');
-const Models = require('./models.js');
+const express = require('express'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    Models = require('./models.js');
 
+const app = express();
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/MyFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/MyFlixDB', { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+});
 
 let auth = require('./auth')(app);
 const passport = require('passport');
