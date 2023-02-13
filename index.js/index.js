@@ -1,7 +1,7 @@
 const express = require('express'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    Models = require('./models.js');
+const bodyParser = require('body-parser'),
+const mongoose = require('mongoose'),
+const Models = require('./models.js');
 
 const app = express();
 const Movies = Models.Movie;
