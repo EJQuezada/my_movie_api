@@ -1,4 +1,4 @@
-const jwtSecret = 'P3rug1@99!';
+const jwtSecret = 'your_jwt_secret';
 
 const jwt = require('jsonwebtoken'),
     passport = require('passport');
@@ -32,4 +32,4 @@ module.exports = (router) => {
             });
         }) (req, res);
     });
-}
+};
