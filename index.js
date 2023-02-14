@@ -96,8 +96,8 @@ app.put('/users/:Username', (req, res) => {
         }
     },
     { new: true }, //This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-        if(err) {
+    (error, updatedUser) => {
+        if(error) {
             console.error(error);
             res.status(500).send('Error: ' + error);
         } else {
@@ -112,7 +112,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
         $push: { FavoriteMovies: req. params.MovieID}
     },
     { new: true }, //This line makes sure that the updated document is returned
-    (err, updatedUser) => {
+    (error, updatedUser) => {
         if (error) {
             console.error(error);
             res.status(500).send('Error: ' + error);
