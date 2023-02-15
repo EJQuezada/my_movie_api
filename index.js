@@ -21,6 +21,11 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
+// default text response when at /
+app.get('/', (req, res) => {
+    res.send('Welcome to MyFlix!');
+});
+
 //return JSON object when at /movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
