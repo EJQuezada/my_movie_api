@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
-
 const morgan = require('morgan');
 const app = express();
     app.use(bodyParser.json());
@@ -33,10 +32,9 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
             res.status(201).json(movies);
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
             res.status(500).send('Error: ' + error);
         });
-    
 });
 
 //CREATE allows new users to register
