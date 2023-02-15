@@ -98,12 +98,12 @@ app.put('/users/:Username', (req, res) => {
             Username: req.body.Username,
             Password: req.body.Password, 
             Email: req.body.Email,
-            Birthday: req.body.Birthday
-        }
+            Birthday: req.body.Birthday,
+        },
     },
     { new: true }, //This line makes sure that the updated document is returned
     (err, updatedUser) => {
-        if(err) {
+        if (err) {
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
