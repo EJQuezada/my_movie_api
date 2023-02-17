@@ -71,9 +71,9 @@ app.get('/users', (req, res) => {
         .then((users) => {
             res.status(201).json(users);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
@@ -83,9 +83,9 @@ app.get('/users/:Username', (req, res) => {
         .then((user) => {
             res.json(user);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
@@ -101,10 +101,10 @@ app.put('/users/:Username', (req, res) => {
         },
     },
     { new: true }, //This line makes sure that the updated document is returned
-    (err, updatedUser) => {
+    (error, updatedUser) => {
         if (err) {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+            console.error(error);
+            res.status(500).send('Error: ' + error);
         } else {
             res.json(updatedUser);
         }
@@ -117,10 +117,10 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
         $push: { FavoriteMovies: req. params.MovieID }
     },
     { new: true }, //This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+    (error, updatedUser) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
         } else {
             res.json(updatedUser);
         }
@@ -137,9 +137,9 @@ app.delete('/users/:Username', (req, res) => {
                 res.status(200).send(req.params.Username + ' was deleted.');
             }
         })
-        .catch ((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch ((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
