@@ -2,11 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Models = require('./models.js');
 const app = express();
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
-const mongoose = require('mongoose');
-const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -14,6 +14,7 @@ const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
+    useCreateIndex: true
 });
 
 let auth = require('./auth')(app);
