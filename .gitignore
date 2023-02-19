@@ -1,6 +1,6 @@
 # directories
 server.js
-node_modules //adding node_modules to gitignore
+
 
 #files
 .env
