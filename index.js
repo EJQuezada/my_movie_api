@@ -14,7 +14,6 @@ const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    useCreateIndex: true
 });
 
 let auth = require('./auth')(app);
