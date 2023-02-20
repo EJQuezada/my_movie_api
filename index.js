@@ -1,25 +1,26 @@
-const express = require('express');
 const bodyParser = require('body-parser');
-uuid = require('uuid');
-morgan = require('morgan');
+const express = require('express');
+const app = express();
+const uuid = require('uuid');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-const app = express();
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: true}));
 
 const Movies = Models.Movie;
 const Users = Models.User;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 mongoose.connect('mongodb://0.0.0.0:27017/myFlixDB', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     //useCreateIndez: true
 });
-
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
 
 // default text response when at /
 app.get('/', (req, res) => {
@@ -66,7 +67,7 @@ app.post('/users', (req, res) => {
 });
 
 //Get all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.find()
         .then((users) => {
             res.status(201).json(users);
@@ -78,7 +79,7 @@ app.get('/users', (req, res) => {
 });
 
 //Get a user by username
-app.get('/users/:Username', (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne({ Username: req.params.Username})
         .then((user) => {
             res.json(user);
@@ -90,8 +91,7 @@ app.get('/users/:Username', (req, res) => {
 });
 
 //UPDATE username of a specific user
-
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
         {
             Username: req.body.Username,
@@ -102,7 +102,7 @@ app.put('/users/:Username', (req, res) => {
     },
     { new: true }, //This line makes sure that the updated document is returned
     (error, updatedUser) => {
-        if (err) {
+        if (error) {
             console.error(error);
             res.status(500).send('Error: ' + error);
         } else {
@@ -112,7 +112,7 @@ app.put('/users/:Username', (req, res) => {
 });
 
 //Add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
         $push: { FavoriteMovies: req. params.MovieID }
     },
@@ -128,7 +128,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 });
 
 //Delete a user by username
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username })
         .then((user) => {
             if (!user) {
@@ -142,5 +142,17 @@ app.delete('/users/:Username', (req, res) => {
             res.status(500).send('Error: ' + error);
         });
 });
+
+//GET all movies
+app.get('/movies', passport.authenticate('jwt', {session: false})), (req, res) => {
+    Movies.find()
+        .then((movies) => {
+            res.status(201).json(movies);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+};
 
 app.listen(8080, () => console.log("listening on 8080"))
