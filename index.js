@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const uuid = require('uuid');
 const morgan = require('morgan');
