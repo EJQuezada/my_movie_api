@@ -18,7 +18,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-mongoose.connect('mongodb://0.0.0.0:27017/myFlixDB', { 
+mongoose.connect('mongo "mongodb+srv://cluster0.yj9pr8k.mongodb.net/myFirstDatabase" --username edgarquezada', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     //useCreateIndez: true
