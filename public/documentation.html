@@ -10,7 +10,7 @@
         <h1>MyFlix Movie API</h1>
             <h2>Objective</h2>
                 <p>
-                    To build a server-side component for a movies database web application. Said web application will provide users with access to information about
+                    To build a server-side component for a movies database web application. Said web application will provide users with access to information about 
                     various movies such as directors, genres, and release date. Users will be able to sign up, update their personal information, and create a list of 
                     their favorite films. 
                 </p>
@@ -41,7 +41,7 @@
                     <th>Response Body Data Format</th>
                 </tr>
             </thead>
-
+            
             <tbody>
                 <tr>
                     <td>Login</td>
@@ -49,9 +49,10 @@
                     <td>POST</td>
                     <td>-</td>
                     <td>-</td>
-                    <td>Allows registered users to login with tokens</td>
+                    <td>ALlows registered users to login with tokens</td>
                 </tr>
-                
+
+            <tbody>
                 <tr>
                     <td>Returns a list of all movies</td>
                     <td>/movies</td>
@@ -87,14 +88,31 @@
                     <td>-</td>
                     <td>A JSON object holding data about a specific director</td>
                 </tr>
+                
+                <tr>
+                    <td>Allows users to add a movie to the database</td>
+                    <td>/movies</td>
+                    <td>POST</td>
+                    <td>-</td>
+                    <td>A JSON object holding data about the movie to add, structured like: {"Title": "String","Description": "String"}</td>
+                    <td>A JSON object holding data about the movie added, structured like: {"Title": "String","Description": "String"}</td>
+                </tr>
+                
+                <tr>
+                    <td>Allows a user to add a movie to their list of favorites</td>
+                    <td>/users/:Username/movies/:MovieID</td>
+                    <td>POST</td>
+                    <td>-</td>
+                    <td>A JSON object holding data about the movie added to the user's favorites list</td>
+                </tr>    
 
                 <tr>
                     <td>Allows new users to register</td>
                     <td>/users</td>
                     <td>POST</td>
                     <td>-</td>
-                    <td>A JSON object holding data about the user to add, structured as: { "name" : "John" }</td>
-                    <td>A JSON object holding data about the user that was added</td>
+                    <td>A JSON object holding data about the user to add, structured as: { "Username": "String", "Password": "String", "Email": "String", "Birthday": "Date", "Favorite Movie": "String"} </td> }</td>
+                    <td>A JSON object holding data about the user that was added, structured as: {"Username": "Name1", "Password": "Test123", "Email": "test@gmail.com", "Birthday": "1990-01-01", "Favorite Movie": []}</td>
                 </tr>
 
                 <tr>
@@ -121,7 +139,7 @@
                     <td>DELETE</td>
                     <td>:id, :movieTitle</td>
                     <td>-</td>
-                    <td>A JSON object holding data about the user and the movie removed from the list</td>
+                    <td>A JSON object holding data about the user and the movie removed from the favorites list</td>
                 </tr>
 
                 <tr>
