@@ -18,27 +18,18 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-mongoose.connect('mongo "mongodb+srv://cluster0.yj9pr8k.mongodb.net/myFirstDatabase" --username edgarquezada', { 
+/* mongoose.connect('mongo "mongodb+srv://cluster0.yj9pr8k.mongodb.net/myFirstDatabase" --username edgarquezada', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     //useCreateIndez: true
-});
+}); */
+
+// This si to connect to your local MongoDB server
+mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB')
 
 // default text response when at /
 app.get('/', (req, res) => {
     res.send('Welcome to MyFlix!');
-});
-
-//return JSON object when at /movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Movies.find()
-        .then((movies) => {
-            res.status(201).json(movies);
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        });
 });
 
 //CREATE allows new users to register
@@ -54,7 +45,7 @@ app.post('/users',
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-    let hashedPassword = Users.hashedPassword(req.body.Password);
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
        .then((user) => {
             if (user) {
@@ -80,20 +71,8 @@ app.post('/users',
         });
 });
 
-//Get all users
-app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find()
-        .then((users) => {
-            res.status(201).json(users);
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        });
-});
-
 //Get a user by username
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+/* app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne({ Username: req.params.Username})
         .then((user) => {
             res.json(user);
@@ -102,7 +81,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
             console.error(error);
             res.status(500).send('Error: ' + error);
         });
-});
+}); */
 
 //UPDATE username of a specific user
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -157,8 +136,9 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
         });
 });
 
+
 //GET all movies
-app.get('/movies', passport.authenticate('jwt', {session: false})), (req, res) => {
+app.get('/movies', (req, res) => {
     Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
@@ -167,9 +147,22 @@ app.get('/movies', passport.authenticate('jwt', {session: false})), (req, res) =
             console.error(error);
             res.status(500).send('Error: ' + error);
         });
-};
+});
+
+//GET a movie by id
+app.get('/movies/:id', (req, res) => {
+    console.log(req.params.id);
+    Movies.findOne({_id: req.params.id})
+        .then((movies) => {
+            res.status(201).json(movies);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+});
 
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
-    console.log('listening on Port ' + port);
+    console.log('listening on Port!! ' + port);
 });
