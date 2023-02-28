@@ -24,7 +24,7 @@ require('./passport');
     //useCreateIndez: true
 }); */
 
-// This si to connect to your local MongoDB server
+// This is to connect to your local MongoDB server
 mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB')
 
 // default text response when at /
@@ -84,7 +84,19 @@ app.post('/users',
 }); */
 
 //UPDATE username of a specific user
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username', 
+[
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains no alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+], passport.authenticate('jwt', { session: false }), (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array()});
+    }
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
         {
             Username: req.body.Username,
@@ -136,9 +148,38 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
         });
 });
 
+//DELETE a movie from user's list of favorites
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
+   Users.findOneAndUpdate(
+        { Username: req.params.Username },
+        {
+            $pull: { FavoriteMovies: req.params.MovieID }
+        },
+        { new: true }, 
+        (error, updatedUser) =>{
+            if (error) {
+                console.error(error);
+                res.status(500).send('Error: ' + error);
+            } else {
+                res.json(updatedUser);
+            }
+        });
+});
+
+//READ Get all users
+app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Users.find()
+        .then((users) => {
+            res.status(201).json(users);
+        })
+        .catch ((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+});
 
 //GET all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
@@ -149,17 +190,59 @@ app.get('/movies', (req, res) => {
         });
 });
 
-//GET a movie by id
-app.get('/movies/:id', (req, res) => {
-    console.log(req.params.id);
-    Movies.findOne({_id: req.params.id})
-        .then((movies) => {
-            res.status(201).json(movies);
+//GET a movie by title
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Movies.findOne({ Title: req.params.Title })
+        .then((movie) => {
+            res.json(movie);
         })
         .catch((error) => {
             console.error(error);
             res.status(500).send('Error: ' + error);
         });
+});
+
+//GET a movie by id
+app.get('/movies/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log(req.params.id);
+    Movies.findOne({_id: req.params.id})
+        .then((movie) => {
+            res.status(201).json(movie);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+});
+
+//GET genre by name
+app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Movies.findOne({ "Genre.Name": req.params.genreName })
+        .then((movie) => {
+            res.json(movie.Genre);
+        })
+        .catch((error) => {
+            console.error(error); 
+            res.status(500).send('Error: ' + error);
+        });
+});
+
+//GET movie by Director
+app.get('/movies/directors/:directorName', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Movies.findOne({ "Director.Name": req.params.directorName })
+        .then((movie) => {
+            res.json(movie.Director);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+});
+
+//Handling Errors
+app.use((error, req, res, next) => {
+    console.error(error.stack);
+    res.status(500).send('Oh, something went wrong. Please try again later.');
 });
 
 const port = process.env.PORT || 8080;
