@@ -242,7 +242,7 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 //Handling Errors
 app.use((error, req, res, next) => {
     console.error(error.stack);
-    res.status(500).send('Oh, something went wrong. Please try again later.');
+    res.status(500).send('Oh, something went wrong! Please try again later.');
 });
 
 const port = process.env.PORT || 8080;
