@@ -19,7 +19,7 @@ const passport = require('passport');
 require('./passport');
 
 // Connect to mongo Atlas
-mongoose.connect(process.env.CONNECTION_URI);
+mongoose.connect(process.env.CONNECTION_URI, {connectTimeoutMS: 30000});
 
 // This is to connect to your local MongoDB server
 // mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true });
