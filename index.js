@@ -18,14 +18,11 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-/* mongoose.connect('mongo "mongodb+srv://cluster0.yj9pr8k.mongodb.net/myFirstDatabase" --username edgarquezada', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    //useCreateIndez: true
-}); */
+// Connect to mongo Atlas
+mongoose.connect(process.env.CONNECTION_URI);
 
 // This is to connect to your local MongoDB server
-mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true });
 
 // default text response when at /
 app.get('/', (req, res) => {
