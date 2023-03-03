@@ -69,9 +69,9 @@
 
                 <tr>
                     <td>Returns data about a single movie by title</td>
-                    <td>/movies/:title</td>
+                    <td>/movies/:Title</td>
                     <td>GET</td>
-                    <td>:title</td>
+                    <td>:Title</td>
                     <td>-</td>
                     <td>A JSON object holding data about a single movie in the database</td> 
                 </tr>
@@ -122,9 +122,9 @@
 
                 <tr>
                     <td>Allows users to update their user info</td>
-                    <td>/users/:id</td>
+                    <td>/users/:Username</td>
                     <td>PUT</td>
-                    <td>:id</td>
+                    <td>:Username</td>
                     <td>-</td>
                     <td>A JSON object holding data about the updated user information</td>
                 </tr>
@@ -140,18 +140,18 @@
 
                 <tr>
                     <td>Allows users to remove a movie from their favorites list</td>
-                    <td>/users/:id/:movieTitle</td>
+                    <td>/users/:Username/movies/:MovieID</td>
                     <td>DELETE</td>
-                    <td>:id, :movieTitle</td>
+                    <td>:id, :MovieID</td>
                     <td>-</td>
                     <td>A JSON object holding data about the user and the movie removed from the favorites list</td>
                 </tr>
 
                 <tr>
                     <td>Allows existing users to unregister</td>
-                    <td>/users/:id</td>
+                    <td>/users/:Username</td>
                     <td>DELETE</td>
-                    <td>:id</td>
+                    <td>:Username</td>
                     <td>-</td>
                     <td>A text message indicating whether the user was successfully unregistered</td>
                 </tr>
