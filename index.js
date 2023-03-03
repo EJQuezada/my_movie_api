@@ -24,9 +24,13 @@ mongoose.connect(process.env.CONNECTION_URI, {connectTimeoutMS: 30000});
 // This is to connect to your local MongoDB server
 // mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true });
 
-// default text response when at /
+// homepage text response when at /
 app.get('/', (req, res) => {
     res.send('Welcome to MyFlix!');
+});
+
+app.get('/documentation', (req, res) => {
+    res.sendFile('public/documentation.html',)
 });
 
 //CREATE allows new users to register
