@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const uuid = require('uuid');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const { check, validationResult } = require('express-validator');
@@ -73,7 +72,7 @@ app.post('/users',
 });
 
 //Get a user by username
-/* app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne({ Username: req.params.Username})
         .then((user) => {
             res.json(user);
@@ -82,7 +81,7 @@ app.post('/users',
             console.error(error);
             res.status(500).send('Error: ' + error);
         });
-}); */
+}); 
 
 //UPDATE username of a specific user
 app.put('/users/:Username', 
