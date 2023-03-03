@@ -2,7 +2,7 @@
 
 Edgar's first live Movie API for his personal use and for other similar movie aficionados.
 
-This app displays data nabout movies, similar to IMDB, such as: 
+This app displays data about movies, similar to IMDB, such as: 
 1) Titles, 
 2) Directors, 
 3) Actors, 
