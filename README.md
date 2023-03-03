@@ -4,10 +4,10 @@ Edgar's first live Movie API for his personal use and for other similar movie af
 
 This app displays data nabout movies, similar to IMDB, such as: 
 1) Titles, 
-2) 2) Directors, 
-3) 3) Actors, 
-4) 4) Genre, 
-5) 5) Release date. 
+2) Directors, 
+3) Actors, 
+4) Genre, 
+5) Release date. 
 
 ## Backend
 
