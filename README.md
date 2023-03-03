@@ -4,7 +4,7 @@ Edgar's first live Movie API for his personal use and for other similar movie af
 
 This app displays data about movies such as 1) Titles, 2) Directors, 3) Actors, 4) Genre, 5) Release date, in a manner similar way found in popular services such as IMDB. 
 
-#Backend
+## Backend
 
 App was built using multiple popular backend tools such as Express, BodyParser, Mongoose, MongoDB, Models.js, and Passport.js. Passport.  
 
