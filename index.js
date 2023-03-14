@@ -12,6 +12,7 @@ const Users = Models.User;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
 
 let auth = require('./auth')(app);
 const passport = require('passport');
