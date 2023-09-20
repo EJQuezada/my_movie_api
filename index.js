@@ -10,13 +10,13 @@ const { check, validationResult } = require('express-validator');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors());
 
-let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+require('./auth')(app);
 
 // Connect to mongo Atlas
 mongoose.connect(process.env.CONNECTION_URI, {connectTimeoutMS: 30000});
