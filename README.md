@@ -12,11 +12,12 @@ This app displays data about movies, similar to IMDB, such as:
 ## Backend
 
 App was built using multiple popular backend tools such as: 
-* Express,
+* Express.js framework,
 * BodyParser,
 * Mongoose,
 * MongoDB,
-* Models.js, and
+* Models.js,
+* Cors, and
 * Passport.js.   
 
 Users login to app using JSON authentication which creates JWT Tokens to ensure only valid registered users can access and use the database. 
