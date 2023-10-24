@@ -22,6 +22,8 @@ App was built using multiple popular backend tools such as:
 
 Users login to app using JSON authentication which creates JWT Tokens to ensure only valid registered users can access and use the database. 
 
+## Tech Stack
+
 The Movie API is composed by the following components: 
 * A simple Node.js API using Express deployed on Render;
 * A MongoDB database.
