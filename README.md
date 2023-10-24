@@ -18,11 +18,21 @@ App was built using multiple popular backend tools such as:
 * MongoDB,
 * Models.js,
 * Cors, and
-* Passport.js.   
+* Passport.js.
+
+## Accessing the application
 
 Users login to app using JSON authentication which creates JWT Tokens to ensure only valid registered users can access and use the database. 
 
+First, clone repository.
+Second, install Node.js.
+Finally, Run the command **node index.js** to start the project.
+
 ## Tech Stack
+
+* HTML
+* CSS
+* JavaScript
 
 The Movie API is composed by the following components: 
 * A simple Node.js API using Express deployed on Render;
